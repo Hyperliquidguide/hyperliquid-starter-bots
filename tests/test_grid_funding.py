@@ -2,7 +2,7 @@
 
 import pytest
 
-from bots.funding_arb import find_spot_pair, funding_rate, hedge_size, hourly_to_apr, should_enter, should_exit
+from bots.funding_arb import basis_pct, find_spot_pair, funding_rate, hedge_size, hourly_to_apr, should_enter, should_exit
 from bots.grid import default_range, extract_oid, grid_levels, initial_orders, replacement_for_fill
 from hlbots.client import is_spot_name
 from hlbots.specs import AssetSpec, round_price
@@ -112,3 +112,9 @@ def test_spot_names_and_spot_price_decimals():
     perp = AssetSpec("BTC", 5, 40)
     assert spot.max_price_decimals == 3 and perp.max_price_decimals == 1
     assert round_price(1.234567, spot) == 1.235
+
+
+def test_basis_pct():
+    assert basis_pct(101.0, 100.0) == pytest.approx(1.0)
+    assert basis_pct(99.5, 100.0) == pytest.approx(-0.5)
+    assert abs(basis_pct(176.0, 87.5)) > 0.5  # the testnet HYPE case: refuse to enter

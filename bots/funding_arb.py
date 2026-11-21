@@ -75,6 +75,11 @@ def hourly_to_apr(hourly_rate: float) -> float:
     return hourly_rate * HOURS_PER_YEAR
 
 
+def basis_pct(spot_px: float, perp_px: float) -> float:
+    """How far spot trades from the perp, in percent of the perp price (positive = spot richer)."""
+    return (spot_px / perp_px - 1) * 100
+
+
 def should_enter(apr: float, min_apr: float, hedged: bool) -> bool:
     """Open the pair only when flat and funding is at or above the entry threshold."""
     return not hedged and apr >= min_apr
@@ -177,6 +182,13 @@ def enter(client: HLClient, guard: RiskGuard, args: argparse.Namespace, spot_nam
     """Open the pair: spot buy first, perp short only after the spot filled. Returns True if both legs went out."""
     coin = args.coin
     mid = client.mid(spot_name)
+    basis = basis_pct(mid, client.mid(coin))
+    if abs(basis) > args.max_basis_pct:
+        log.warning(
+            "ENTRY skipped: spot %s is %.2f%% away from the %s perp (limit %.2f%%). A gap that wide can cost more "
+            "than the funding pays, and it often means the spot book is thin.", token, basis, coin, args.max_basis_pct,
+        )
+        return False
     qty = hedge_size(args.order_usd, mid * (1 + SPOT_SLIPPAGE), spot_spec, perp_spec)
     if not qty:
         log.warning("ENTRY skipped: order size rounds to zero (order-usd %.2f, price %.6g)", args.order_usd, mid)
@@ -228,6 +240,7 @@ def main() -> None:
     p.add_argument("--min-apr", type=float, default=15.0, help="enter when annualized funding is at least this many percent")
     p.add_argument("--exit-apr", type=float, default=5.0, help="exit when annualized funding falls below this many percent")
     p.add_argument("--order-usd", type=float, default=15.0, help="notional per leg (minimum $10)")
+    p.add_argument("--max-basis-pct", type=float, default=0.5, help="skip entry when spot and perp prices differ by more than this %%")
     p.add_argument("--max-loss-usd", type=float, default=15.0, help="stop when equity drops this much")
     p.add_argument("--interval", type=float, default=30.0, help="seconds between loops")
     p.add_argument("--run-seconds", type=float, default=0, help="stop after this many seconds (0 = run until Ctrl+C)")

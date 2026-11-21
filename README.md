@@ -69,7 +69,7 @@ python -m bots.grid --coin BTC --range-pct 2 --levels 8 --order-usd 12
 
 ### Funding arb · `bots/funding_arb.py`
 
-When a perp's funding is positive enough, it buys the spot token and shorts the same size on the perp, then exits both legs when funding falls.
+When a perp's funding is positive enough, it buys the spot token and shorts the same size on the perp, then exits both legs when funding falls. It sends the perp short only after the spot buy fills, and skips entry when spot and perp prices differ by more than `--max-basis-pct` (0.5% by default).
 
 ```bash
 python -m bots.funding_arb --coin HYPE --min-apr 20 --exit-apr 5

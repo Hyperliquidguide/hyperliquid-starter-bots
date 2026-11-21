@@ -144,7 +144,7 @@ For Hyperliquid details (fees, rate limits, error messages, HIP-3 markets) point
 
 ## Use it from your coding agent
 
-This repo also ships a **read-only MCP server** and an **Agent Skill**, so your agent can look up live Hyperliquid specs instead of guessing. The server holds no keys and places no orders. Its tools: `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart`, `starter_bot` ([details](hlmcp/README.md)). It's on [PyPI](https://pypi.org/project/hyperliquid-starter-bots/) and runs through [uv](https://docs.astral.sh/uv/), or `pip install hyperliquid-starter-bots` and then run `hl-guide-mcp`.
+This repo also ships an **MCP server** (read-only by default, with [opt-in testnet order tools](hlmcp/README.md#opt-in-order-tools)) and an **Agent Skill**, so your agent can look up live Hyperliquid specs instead of guessing. The server holds no keys and places no orders. Its tools: `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart`, `starter_bot` ([details](hlmcp/README.md)). It's on [PyPI](https://pypi.org/project/hyperliquid-starter-bots/) and runs through [uv](https://docs.astral.sh/uv/), or `pip install hyperliquid-starter-bots` and then run `hl-guide-mcp`.
 
 **Claude Code** (plugin: skill + MCP in one step)
 

@@ -22,13 +22,15 @@ The repo's `AGENTS.md` lists the layout and the rules for adding a strategy. Bot
 
 ## MCP server and Agent Skill
 
-The same repo ships a read-only MCP server (no keys, no orders) with tools `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart` and `starter_bot`:
+The same repo ships an MCP server, read-only by default (no keys, no orders), with tools `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart` and `starter_bot`:
 
 ```bash
 claude mcp add hyperliquid-guide -- uvx --from hyperliquid-starter-bots hl-guide-mcp
 codex mcp add hyperliquid-guide -- uvx --from hyperliquid-starter-bots hl-guide-mcp
 npx skills add Hyperliquidguide/hyperliquid-starter-bots      # Agent Skill: hyperliquid-bot-builder
 ```
+
+Order tools (`prepare_order` → `place_order` with a one-time confirm token, `cancel_orders`) are off unless the MCP config sets `HL_MCP_TRADING=on`. They require an API wallet key, stay on testnet unless `HL_MCP_ALLOW_MAINNET=yes`, cap order and position size, and have no withdraw or transfer tools. Details: https://github.com/Hyperliquidguide/hyperliquid-starter-bots/tree/main/hlmcp
 
 ## Endpoints
 

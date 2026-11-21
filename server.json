@@ -2,15 +2,15 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Hyperliquidguide/hyperliquid-guide",
   "title": "Hyperliquid Guide",
-  "description": "Read-only Hyperliquid reference tools: market specs, order rounding, funding, error fixes.",
+  "description": "Hyperliquid tools: market specs, order rounding, funding, error fixes. Order tools opt-in.",
   "repository": { "url": "https://github.com/Hyperliquidguide/hyperliquid-starter-bots", "source": "github" },
   "websiteUrl": "https://hyperliquidguide.com/build",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "hyperliquid-starter-bots",
-      "version": "0.2.1",
+      "version": "0.3.0",
       "transport": { "type": "stdio" }
     }
   ]

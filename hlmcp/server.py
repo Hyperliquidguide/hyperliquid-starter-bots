@@ -1,6 +1,8 @@
 """Hyperliquid Guide MCP server: accurate Hyperliquid facts for coding agents.
 
-Read-only. It holds no keys and places no orders. It gives an agent (Claude Code, Codex, Cursor,
+Read-only by default: it holds no keys and places no orders. Order tools exist but stay off unless
+the MCP config sets HL_MCP_TRADING=on (API wallet only, testnet unless mainnet is allowed separately,
+preview + confirm token for every order, hard size caps, no withdrawals). See hlmcp/trading.py. It gives an agent (Claude Code, Codex, Cursor,
 Claude Desktop) what it needs to write correct Hyperliquid code: live market specs, rounding,
 funding, error explanations, account and referral status, the agent quickstart, and the source of
 the starter bots.
@@ -231,6 +233,12 @@ def starter_bot(kind: str) -> str:
 def quickstart_resource() -> str:
     """The agent quickstart as a resource."""
     return quickstart()
+
+
+from hlmcp import trading  # noqa: E402
+
+if trading.enabled():
+    trading.register(mcp)
 
 
 def main() -> None:

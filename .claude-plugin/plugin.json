@@ -1,7 +1,7 @@
 {
   "name": "hyperliquid-guide",
   "description": "Build Hyperliquid trading bots with accurate specs: a bot-builder skill plus a read-only MCP server (market specs, rounding, funding, error explanations, starter bot source).",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "author": {
     "name": "Hyperliquid Guide",
     "url": "https://hyperliquidguide.com"

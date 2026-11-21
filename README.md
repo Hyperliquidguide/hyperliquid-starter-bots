@@ -189,6 +189,9 @@ They run offline with no keys. CI runs them on Python 3.10 and 3.12.
 ## More from Hyperliquid Guide
 
 - [Build a Hyperliquid bot with Claude Code or Codex](https://hyperliquidguide.com/build)
+- [Grid bot guide](https://hyperliquidguide.com/guides/trading/hyperliquid-grid-bot)
+- [Funding rate arbitrage guide](https://hyperliquidguide.com/guides/trading/hyperliquid-funding-rate-arbitrage)
+- [Hyperliquid MCP servers compared](https://hyperliquidguide.com/guides/trading/hyperliquid-mcp-server)
 - [Hyperliquid API guide](https://hyperliquidguide.com/guides/trading/hyperliquid-api-guide)
 - [Market making on Hyperliquid](https://hyperliquidguide.com/guides/trading/hyperliquid-market-making-guide)
 - [Fees and VIP tiers](https://hyperliquidguide.com/guides/fees/fees-explained)

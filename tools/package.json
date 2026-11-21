@@ -1,0 +1,8 @@
+{
+  "name": "starter-bots-assets",
+  "private": true,
+  "type": "module",
+  "description": "Regenerates the README graphics in ../assets. Run: npm install && npm run assets",
+  "scripts": { "assets": "node make-assets.mjs" },
+  "devDependencies": { "satori": "^0.10.14", "sharp": "^0.33.5" }
+}

@@ -25,6 +25,11 @@ def dex_of(coin: str) -> str:
     return coin.split(":", 1)[0] if ":" in coin else ""
 
 
+def is_spot_name(coin: str) -> bool:
+    """Spot pairs are named 'PURR/USDC' or '@<index>'. Perps never contain '/' or start with '@'."""
+    return coin.startswith("@") or "/" in coin
+
+
 class HLClient:
     def __init__(self, settings: Settings, coins: list[str], dry_run: bool = False):
         self.settings = settings
@@ -43,6 +48,8 @@ class HLClient:
     # ---------- market data ----------
 
     def spec(self, coin: str) -> AssetSpec:
+        if coin not in self._specs and is_spot_name(coin):
+            self._specs[coin] = self._spot_spec(coin)
         if coin not in self._specs:
             meta = self.info.meta(dex=dex_of(coin))
             for asset in meta["universe"]:
@@ -52,6 +59,22 @@ class HLClient:
             else:
                 raise SystemExit(f"Unknown market {coin!r}. HIP-3 markets need their prefix, e.g. 'xyz:XYZ100'.")
         return self._specs[coin]
+
+    def _spot_spec(self, pair: str) -> AssetSpec:
+        """Spec for a spot pair named like 'PURR/USDC' or '@107'. Size decimals come from the base token."""
+        meta = self.info.spot_meta()
+        for market in meta["universe"]:
+            if market["name"] == pair:
+                base = meta["tokens"][market["tokens"][0]]
+                return AssetSpec(pair, base["szDecimals"], 1, is_spot=True)
+        raise SystemExit(f"Unknown spot market {pair!r}.")
+
+    def spot_balance(self, token: str) -> float:
+        """Total spot balance of one token (e.g. 'USDC', 'UBTC'). Zero if the account holds none."""
+        for bal in self.info.spot_user_state(self.address).get("balances", []):
+            if bal["coin"] == token:
+                return float(bal["total"])
+        return 0.0
 
     def mid(self, coin: str) -> float:
         return float(self.info.all_mids(dex_of(coin))[coin])

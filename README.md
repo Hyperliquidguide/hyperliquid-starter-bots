@@ -89,6 +89,14 @@ python -m bots.twap --coin ETH --side buy --total-usd 300 --minutes 30 --limit-p
 
 Every bot takes `--help` and `--dry-run`, and the strategy bots take `--run-seconds` (TWAP uses `--minutes`). HIP-3 markets use their dex prefix, for example `--coin xyz:XYZ100`.
 
+### TypeScript · `ts/`
+
+A TypeScript market maker on [`@nktkas/hyperliquid`](https://github.com/nktkas/hyperliquid) with the same defaults: testnet, post-only quotes, inventory skew, risk caps, dry-run and the disclosed referral step. It reads the same `.env`. See [ts/README.md](ts/README.md).
+
+```bash
+cd ts && npm install && npm run mm -- --coin BTC --dry-run
+```
+
 ## Quick start (testnet)
 
 You need Python 3.10+ and a wallet that has made a deposit on Hyperliquid mainnet (the testnet faucet requires one).

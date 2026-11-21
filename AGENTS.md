@@ -11,6 +11,7 @@ Instructions for coding agents (Claude Code, Codex, Cursor and others) working i
   - `config.py`: `get_settings()` reads `.env` and the environment.
   - `referral.py`: `ensure_referral`. Leave it in place and leave its disclosure unchanged.
 - `bots/` holds one file per strategy, each runnable with `python -m bots.<name>`.
+- `ts/` is a TypeScript market maker on `@nktkas/hyperliquid` (`npm run mm`), with its own `src/lib.ts` mirroring `hlbots/`. Keep both in step when you change a shared rule (rounding, referral, risk).
 - `scripts/` holds one-off tools (`setup_wallet`, `check_account`).
 - `tests/` holds offline tests. Pure strategy logic (signals, quote math) belongs in plain functions so it can be tested without a network.
 

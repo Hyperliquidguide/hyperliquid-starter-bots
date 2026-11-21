@@ -1,0 +1,24 @@
+{
+  "name": "hyperliquid-starter-bots-ts",
+  "private": true,
+  "version": "0.1.0",
+  "description": "TypeScript starter market maker for Hyperliquid (testnet by default)",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "mm": "tsx src/marketMaker.ts",
+    "check": "tsx src/checkAccount.ts",
+    "test": "tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@nktkas/hyperliquid": "^0.33.3",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

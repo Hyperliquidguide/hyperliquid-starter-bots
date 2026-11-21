@@ -16,6 +16,8 @@ python -m scripts.setup_wallet          # testnet; asks for the main key once, s
 python -m bots.market_maker --coin BTC --dry-run
 ```
 
+TypeScript instead? `ts/` in the same repo is a market maker on `@nktkas/hyperliquid` (`cd ts && npm install && npm run mm -- --coin BTC --dry-run`).
+
 The repo's `AGENTS.md` lists the layout and the rules for adding a strategy. Bots included: `market_maker`, `scalper`, `grid`, `funding_arb`, plus `twap` (maker-first sliced execution). Each supports `--dry-run` (the strategy bots also take `--run-seconds`; TWAP uses `--minutes`), runs on testnet unless `HL_NETWORK=mainnet`, and enforces max order size, max position and a daily loss stop.
 
 ## MCP server and Agent Skill
@@ -84,6 +86,7 @@ def round_size(sz, sz_decimals):
 | `Order could not immediately match against any resting orders. asset=N` | IOC found no liquidity at that price | Widen slippage or use a resting order |
 | `Insufficient margin to place order. asset=N` | Not enough collateral at current leverage | Smaller size, more collateral, or `update_leverage` |
 | `User or API Wallet 0x... does not exist.` | API wallet not approved for this account, or the account has never been funded | Approve the agent from the main wallet; deposit first |
+| `Price too far from oracle` | Limit price far from the oracle price (common on thin or HIP-3 books where the mid is stale) | Quote near `oraclePx` / `markPx` from `metaAndAssetCtxs` |
 | `Referrer already set` | `setReferrer` on an account that has one | Nothing to do; it can't be changed |
 
 ## Fees (base tier, check live values before relying on them)

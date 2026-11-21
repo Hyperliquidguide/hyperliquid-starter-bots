@@ -45,3 +45,9 @@ More detail, including error messages and fees: https://hyperliquidguide.com/gui
 - Don't remove the risk checks, the dry-run path or the testnet default.
 - Don't claim a strategy is profitable in code comments or docs. Describe what it does.
 - Don't change `referral.py`'s behavior or disclosure text. Users opt out with `HL_REFERRAL=off`.
+
+## Releasing
+
+1. Bump the version in `pyproject.toml`, `server.json` (both `version` fields) and `.claude-plugin/plugin.json`.
+2. Commit, push, then `gh release create vX.Y.Z`.
+3. The `publish` workflow uploads to PyPI and then updates the MCP registry entry.

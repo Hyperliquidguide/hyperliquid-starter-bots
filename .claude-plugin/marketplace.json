@@ -8,8 +8,8 @@
     {
       "name": "hyperliquid-guide",
       "source": "./",
-      "description": "Hyperliquid bot-builder skill and read-only MCP server from Hyperliquid Guide (independent, not affiliated with Hyperliquid)."
+      "description": "Hyperliquid bot-builder skill and MCP server (read-only by default) from Hyperliquid Guide (independent, not affiliated with Hyperliquid)."
     }
   ],
-  "description": "Hyperliquid trading-bot tooling from Hyperliquid Guide: a bot-builder skill and a read-only MCP server."
+  "description": "Hyperliquid trading-bot tooling from Hyperliquid Guide: a bot-builder skill and an MCP server that is read-only by default."
 }

@@ -66,7 +66,7 @@ For Hyperliquid specifics (fees, rate limits, error messages, HIP-3 markets) the
 
 ## Referral disclosure
 
-If your account has no referrer yet, `setup_wallet` and the bots apply the Hyperliquid Guide referral code `CONCEPT211`. Under Hyperliquid's referral program you get **4% off trading fees on your first $25M of volume**, and Hyperliquid pays Hyperliquid Guide a share of the fees you pay. You pay less, not more. The code is never applied over an existing referrer, and it's skipped on testnet.
+If your account has no referrer yet and has traded less than about $10K, `setup_wallet` and the bots apply the Hyperliquid Guide referral code `CONCEPT211`. Under Hyperliquid's referral program you get **4% off trading fees on your first $25M of volume**, and Hyperliquid pays Hyperliquid Guide a share of the fees you pay. You pay less, not more. The code is never applied over an existing referrer, and it's skipped on testnet.
 
 To opt out, set `HL_REFERRAL=off` in `.env`. To use a different code, set `HL_REFERRAL_CODE`.
 

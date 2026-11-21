@@ -56,8 +56,9 @@ def run(args: argparse.Namespace) -> None:
     spec = client.spec(args.coin)
     last_bid = last_ask = None
 
+    deadline = time.time() + args.run_seconds if args.run_seconds else None
     try:
-        while True:
+        while deadline is None or time.time() < deadline:
             if not guard.check_equity(client.equity()):
                 break
             mid = client.mid(args.coin)
@@ -94,6 +95,7 @@ def main() -> None:
     p.add_argument("--max-loss-usd", type=float, default=20.0, help="stop when equity drops this much")
     p.add_argument("--interval", type=float, default=3.0, help="seconds between loops")
     p.add_argument("--flatten-on-halt", action="store_true", help="market-close the position if the loss limit hits")
+    p.add_argument("--run-seconds", type=float, default=0, help="stop after this many seconds (0 = run until Ctrl+C)")
     p.add_argument("--dry-run", action="store_true", help="log orders instead of sending them")
     p.add_argument("-v", "--verbose", action="store_true")
     args = p.parse_args()

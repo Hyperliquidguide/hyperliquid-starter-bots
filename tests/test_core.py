@@ -85,27 +85,54 @@ def test_atr():
 # ---------- referral ----------
 
 class FakeInfo:
-    def __init__(self, referred_by=None):
-        self.referred_by = referred_by
+    """referred: None (no referrer) or a code string; volume: lifetime volume."""
+
+    def __init__(self, referred=None, volume=0.0, accept=True):
+        self.referred, self.volume, self.accept = referred, volume, accept
 
     def query_referral_state(self, _addr):
-        return {"referredBy": {"code": self.referred_by} if self.referred_by else None, "cumVlm": "0"}
+        ref = {"referrer": "0x0", "code": self.referred} if self.referred else None
+        return {"referredBy": ref, "cumVlm": str(self.volume)}
 
 
 class FakeExchange:
-    def __init__(self):
-        self.calls = []
+    def __init__(self, info):
+        self.info, self.calls = info, []
 
     def set_referrer(self, code):
         self.calls.append(code)
+        # Hyperliquid answers "ok" either way; past the window it records "N/A".
+        self.info.referred = code if self.info.accept else "N/A"
         return {"status": "ok"}
 
 
-def test_referral_respects_opt_out_and_existing():
-    ex = FakeExchange()
-    assert "skipped" in ensure_referral(ex, FakeInfo(), "0x1", "CONCEPT211", enabled=False, is_mainnet=True)
-    assert "already set" in ensure_referral(ex, FakeInfo("OTHER"), "0x1", "CONCEPT211", True, True)
-    assert "testnet" in ensure_referral(ex, FakeInfo(), "0x1", "CONCEPT211", True, False)
-    assert ex.calls == []
-    assert "applied" in ensure_referral(ex, FakeInfo(), "0x1", "CONCEPT211", True, True)
-    assert ex.calls == ["CONCEPT211"]
+@pytest.fixture(autouse=True)
+def no_sleep(monkeypatch):
+    monkeypatch.setattr("hlbots.referral.time.sleep", lambda _s: None)
+
+
+def run(info, enabled=True, mainnet=True):
+    ex = FakeExchange(info)
+    return ensure_referral(ex, info, "0x1", "CONCEPT211", enabled, mainnet), ex.calls
+
+
+def test_referral_opt_out_existing_and_testnet_never_call():
+    assert run(FakeInfo(), enabled=False)[1] == []
+    assert "already set" in run(FakeInfo("OTHER"))[0]
+    assert "past" in run(FakeInfo("N/A"))[0]
+    assert "testnet" in run(FakeInfo(), mainnet=False)[0]
+
+
+def test_referral_skips_accounts_past_volume_window():
+    msg, calls = run(FakeInfo(volume=12_877))
+    assert "not available" in msg and calls == []
+
+
+def test_referral_applies_and_verifies():
+    msg, calls = run(FakeInfo(volume=5_990))
+    assert msg == "applied (CONCEPT211)" and calls == ["CONCEPT211"]
+
+
+def test_referral_reports_silent_refusal():
+    msg, _ = run(FakeInfo(volume=100, accept=False))
+    assert "not applied" in msg and "N/A" in msg

@@ -73,8 +73,9 @@ def run(args: argparse.Namespace) -> None:
     spec = client.spec(args.coin)
     last_candle_t = None
 
+    deadline = time.time() + args.run_seconds if args.run_seconds else None
     try:
-        while True:
+        while deadline is None or time.time() < deadline:
             if not guard.check_equity(client.equity()):
                 client.cancel_all(args.coin)
                 client.close_position(args.coin)
@@ -128,6 +129,7 @@ def main() -> None:
     p.add_argument("--order-usd", type=float, default=15.0, help="notional per trade (minimum $10)")
     p.add_argument("--max-loss-usd", type=float, default=20.0, help="stop when equity drops this much")
     p.add_argument("--poll", type=float, default=10.0, help="seconds between checks")
+    p.add_argument("--run-seconds", type=float, default=0, help="stop after this many seconds (0 = run until Ctrl+C)")
     p.add_argument("--dry-run", action="store_true", help="log orders instead of sending them")
     p.add_argument("-v", "--verbose", action="store_true")
     args = p.parse_args()

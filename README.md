@@ -5,6 +5,7 @@
 <p align="center">
   <a href="https://github.com/Hyperliquidguide/hyperliquid-starter-bots/actions/workflows/tests.yml"><img src="https://github.com/Hyperliquidguide/hyperliquid-starter-bots/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
   <a href="https://pypi.org/project/hyperliquid-starter-bots/"><img src="https://img.shields.io/pypi/v/hyperliquid-starter-bots?color=97FCE4" alt="PyPI"></a>
+  <a href="https://glama.ai/mcp/servers/Hyperliquidguide/hyperliquid-starter-bots"><img src="https://glama.ai/mcp/servers/Hyperliquidguide/hyperliquid-starter-bots/badges/score.svg" alt="Glama MCP server score" height="20"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-97FCE4" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/default-testnet-F5C76B" alt="Testnet by default">

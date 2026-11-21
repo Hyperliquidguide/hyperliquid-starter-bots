@@ -17,6 +17,8 @@
   Run one on testnet in five minutes, then have your coding agent turn it into your own strategy.
 </p>
 
+<!-- mcp-name: io.github.Hyperliquidguide/hyperliquid-guide -->
+
 > [!WARNING]
 > **No returns are promised.** These bots are teaching code with no proven edge. Real money can be lost, fast. Start on testnet and read [DISCLAIMER.md](DISCLAIMER.md).
 

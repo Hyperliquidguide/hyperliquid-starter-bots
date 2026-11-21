@@ -4,6 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/Hyperliquidguide/hyperliquid-starter-bots/actions/workflows/tests.yml"><img src="https://github.com/Hyperliquidguide/hyperliquid-starter-bots/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
+  <a href="https://pypi.org/project/hyperliquid-starter-bots/"><img src="https://img.shields.io/pypi/v/hyperliquid-starter-bots?color=97FCE4" alt="PyPI"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-97FCE4" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/default-testnet-F5C76B" alt="Testnet by default">
@@ -124,7 +125,7 @@ For Hyperliquid details (fees, rate limits, error messages, HIP-3 markets) point
 
 ## Use it from your coding agent
 
-This repo also ships a **read-only MCP server** and an **Agent Skill**, so your agent can look up live Hyperliquid specs instead of guessing. The server holds no keys and places no orders. Its tools: `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart`, `starter_bot` ([details](hlmcp/README.md)). It runs through [uv](https://docs.astral.sh/uv/).
+This repo also ships a **read-only MCP server** and an **Agent Skill**, so your agent can look up live Hyperliquid specs instead of guessing. The server holds no keys and places no orders. Its tools: `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart`, `starter_bot` ([details](hlmcp/README.md)). It's on [PyPI](https://pypi.org/project/hyperliquid-starter-bots/) and runs through [uv](https://docs.astral.sh/uv/), or `pip install hyperliquid-starter-bots` and then run `hl-guide-mcp`.
 
 **Claude Code** (plugin: skill + MCP in one step)
 
@@ -135,13 +136,13 @@ This repo also ships a **read-only MCP server** and an **Agent Skill**, so your 
 **Claude Code** (MCP only)
 
 ```bash
-claude mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
+claude mcp add hyperliquid-guide -- uvx --from hyperliquid-starter-bots hl-guide-mcp
 ```
 
 **Codex**
 
 ```bash
-codex mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
+codex mcp add hyperliquid-guide -- uvx --from hyperliquid-starter-bots hl-guide-mcp
 ```
 
 **Cursor, Claude Desktop and other MCP clients** (add to `mcp.json` / `claude_desktop_config.json`)
@@ -151,7 +152,7 @@ codex mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquid
   "mcpServers": {
     "hyperliquid-guide": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots", "hl-guide-mcp"]
+      "args": ["--from", "hyperliquid-starter-bots", "hl-guide-mcp"]
     }
   }
 }

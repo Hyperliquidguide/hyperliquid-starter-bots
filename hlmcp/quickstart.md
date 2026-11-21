@@ -23,8 +23,8 @@ The repo's `AGENTS.md` lists the layout and the rules for adding a strategy. Bot
 The same repo ships a read-only MCP server (no keys, no orders) with tools `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart` and `starter_bot`:
 
 ```bash
-claude mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
-codex mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
+claude mcp add hyperliquid-guide -- uvx --from hyperliquid-starter-bots hl-guide-mcp
+codex mcp add hyperliquid-guide -- uvx --from hyperliquid-starter-bots hl-guide-mcp
 npx skills add Hyperliquidguide/hyperliquid-starter-bots      # Agent Skill: hyperliquid-bot-builder
 ```
 

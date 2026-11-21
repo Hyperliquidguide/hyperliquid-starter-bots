@@ -2,7 +2,7 @@
   "mcpServers": {
     "hyperliquid-guide": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots", "hl-guide-mcp"]
+      "args": ["--from", "hyperliquid-starter-bots", "hl-guide-mcp"]
     }
   }
 }

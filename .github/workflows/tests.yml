@@ -19,3 +19,24 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python -m pytest -q
+
+  docker-mcp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t hl-guide-mcp .
+      - name: MCP server starts and lists its tools
+        run: |
+          {
+            echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}'
+            echo '{"jsonrpc":"2.0","method":"notifications/initialized"}'
+            echo '{"jsonrpc":"2.0","id":2,"method":"tools/list"}'
+            sleep 5
+          } | timeout 60 docker run -i --rm hl-guide-mcp > out.jsonl
+          python3 -c "
+          import json
+          msgs = [json.loads(l) for l in open('out.jsonl') if l.strip()]
+          tools = [t['name'] for m in msgs if m.get('id') == 2 for t in m['result']['tools']]
+          print(tools)
+          assert len(tools) == 7, tools
+          "

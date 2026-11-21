@@ -5,12 +5,12 @@
   "description": "Read-only Hyperliquid reference tools: market specs, order rounding, funding, error fixes.",
   "repository": { "url": "https://github.com/Hyperliquidguide/hyperliquid-starter-bots", "source": "github" },
   "websiteUrl": "https://hyperliquidguide.com/build",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "hyperliquid-starter-bots",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "transport": { "type": "stdio" }
     }
   ]

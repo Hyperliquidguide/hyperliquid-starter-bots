@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hyperliquid-starter-bots"
-version = "0.2.0"
+version = "0.2.1"
 description = "Starter trading bots for Hyperliquid plus a read-only MCP server for coding agents"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -17,6 +17,7 @@ Repository = "https://github.com/Hyperliquidguide/hyperliquid-starter-bots"
 
 [project.scripts]
 hl-guide-mcp = "hlmcp.server:main"
+hyperliquid-starter-bots = "hlmcp.server:main"
 
 [tool.setuptools]
 packages = ["hlbots", "bots", "scripts", "hlmcp"]

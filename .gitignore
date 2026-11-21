@@ -6,3 +6,6 @@ __pycache__/
 .pytest_cache/
 logs/
 node_modules/
+build/
+*.egg-info/
+dist/

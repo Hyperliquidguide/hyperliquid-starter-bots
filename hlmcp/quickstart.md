@@ -18,6 +18,16 @@ python -m bots.market_maker --coin BTC --dry-run
 
 The repo's `AGENTS.md` lists the layout and the rules for adding a strategy. Bots included: `market_maker`, `scalper`, `grid`, `funding_arb`. Each supports `--dry-run` and `--run-seconds`, runs on testnet unless `HL_NETWORK=mainnet`, and enforces max order size, max position and a daily loss stop.
 
+## MCP server and Agent Skill
+
+The same repo ships a read-only MCP server (no keys, no orders) with tools `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart` and `starter_bot`:
+
+```bash
+claude mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
+codex mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
+npx skills add Hyperliquidguide/hyperliquid-starter-bots      # Agent Skill: hyperliquid-bot-builder
+```
+
 ## Endpoints
 
 | Network | REST | WebSocket |

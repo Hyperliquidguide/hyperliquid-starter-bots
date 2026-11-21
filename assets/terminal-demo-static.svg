@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="424" viewBox="0 0 860 424" role="img" aria-label="Terminal: setting up a wallet and running the market maker on testnet">
+<style>.l{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;white-space:pre;opacity:1}</style>
+<rect width="860" height="424" rx="14" fill="#0B1018" stroke="#1A2230"/>
+<line x1="0" y1="36" x2="860" y2="36" stroke="#1A2230"/>
+<circle cx="22" cy="18" r="6" fill="#FF5F57"/><circle cx="42" cy="18" r="6" fill="#FEBC2E"/><circle cx="62" cy="18" r="6" fill="#28C840"/>
+<text x="430" y="23" text-anchor="middle" fill="#8A96A8" style="font:12px ui-monospace,Menlo,Consolas,monospace">hyperliquid-starter-bots: testnet</text>
+<text class="l" x="24" y="62" fill="#97FCE4" style="animation-name:a0">$ python -m scripts.setup_wallet</text>
+<text class="l" x="24" y="86" fill="#8A96A8" style="animation-name:a1">Main wallet: 0x5eE6…9B86</text>
+<text class="l" x="24" y="110" fill="#8A96A8" style="animation-name:a2">Referral: applied (4% off fees on your first $25M)</text>
+<text class="l" x="24" y="134" fill="#8A96A8" style="animation-name:a3">API wallet approved: 0xE72a…d7fE (name: starter-bots)</text>
+<text class="l" x="24" y="158" fill="#8A96A8" style="animation-name:a4"></text>
+<text class="l" x="24" y="182" fill="#97FCE4" style="animation-name:a5">$ python -m bots.market_maker --coin BTC</text>
+<text class="l" x="24" y="206" fill="#8A96A8" style="animation-name:a6">Risk guard armed: start equity $39.01, daily loss limit $20.00</text>
+<text class="l" x="24" y="230" fill="#3DDC97" style="animation-name:a7">BUY  0.00024 BTC @ 60487.0 (Alo) -&gt; resting</text>
+<text class="l" x="24" y="254" fill="#FF6B7A" style="animation-name:a8">SELL 0.00024 BTC @ 60547.0 (Alo) -&gt; resting</text>
+<text class="l" x="24" y="278" fill="#E8EEF5" style="animation-name:a9">mid 60517 | pos $0.00 | quotes 60486.7 / 60547.3</text>
+<text class="l" x="24" y="302" fill="#3DDC97" style="animation-name:a10">BUY  0.00024 BTC @ 60463.0 (Alo) -&gt; resting</text>
+<text class="l" x="24" y="326" fill="#FF6B7A" style="animation-name:a11">SELL 0.00024 BTC @ 60524.0 (Alo) -&gt; resting</text>
+<text class="l" x="24" y="350" fill="#E8EEF5" style="animation-name:a12">mid 60498 | pos $14.52 | quotes 60463.4 / 60523.9</text>
+<text class="l" x="24" y="374" fill="#F5C76B" style="animation-name:a13">^C  Open orders cancelled. Position left as is.</text>
+</svg>

@@ -256,3 +256,11 @@ ${box(600, 80, 220, 'Price-neutral', 'gains on one leg offset the other', C.acce
   fs.writeFileSync(path.join(OUT, 'diagram-funding-arb.svg'), frame(W, H, 'Funding arb: hold spot, short the perp, collect funding', body, 'Funding arbitrage diagram'));
   console.log('wrote diagram-funding-arb.svg');
 }
+
+// Static copy of the terminal demo for web pages, where an animation that starts blank looks broken.
+{
+  const anim = fs.readFileSync(path.join(OUT, 'terminal-demo.svg'), 'utf8');
+  const stat = anim.replace(/opacity:0;animation-duration:[^}]*}/, 'opacity:1}').replace(/<style>@keyframes[^<]*<\/style>\n?/g, '');
+  fs.writeFileSync(path.join(OUT, 'terminal-demo-static.svg'), stat);
+  console.log('wrote terminal-demo-static.svg');
+}

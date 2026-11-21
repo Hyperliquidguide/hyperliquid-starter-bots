@@ -1,0 +1,4 @@
+bots
+hlbots
+hlmcp
+scripts

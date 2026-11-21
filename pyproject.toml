@@ -1,10 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "hyperliquid-starter-bots"
-version = "0.1.0"
-description = "Starter trading bots for Hyperliquid, built to be extended by you or your coding agent"
+version = "0.2.0"
+description = "Starter trading bots for Hyperliquid plus a read-only MCP server for coding agents"
+readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-dependencies = ["hyperliquid-python-sdk==0.24.0"]
+dependencies = ["hyperliquid-python-sdk==0.24.0", "mcp>=1.9,<2", "requests>=2.31"]
+
+[project.urls]
+Homepage = "https://hyperliquidguide.com/build"
+Repository = "https://github.com/Hyperliquidguide/hyperliquid-starter-bots"
+
+[project.scripts]
+hl-guide-mcp = "hlmcp.server:main"
+
+[tool.setuptools]
+packages = ["hlbots", "bots", "scripts", "hlmcp"]
+
+[tool.setuptools.package-data]
+hlmcp = ["quickstart.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,0 +1,28 @@
+{
+  "name": "hyperliquid-guide",
+  "description": "Build Hyperliquid trading bots with accurate specs: a bot-builder skill plus a read-only MCP server (market specs, rounding, funding, error explanations, starter bot source).",
+  "version": "0.2.0",
+  "author": {
+    "name": "Hyperliquid Guide",
+    "url": "https://hyperliquidguide.com"
+  },
+  "homepage": "https://hyperliquidguide.com/build",
+  "repository": "https://github.com/Hyperliquidguide/hyperliquid-starter-bots",
+  "license": "MIT",
+  "keywords": [
+    "hyperliquid",
+    "trading-bot",
+    "market-making",
+    "mcp",
+    "defi"
+  ],
+  "icon": "assets/icon.png",
+  "network": {
+    "hosts": [
+      "api.hyperliquid.xyz",
+      "api.hyperliquid-testnet.xyz",
+      "hyperliquidguide.com",
+      "github.com"
+    ]
+  }
+}

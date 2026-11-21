@@ -120,6 +120,47 @@ Open the repo in Claude Code, Codex or Cursor and ask for what you want. The age
 
 For Hyperliquid details (fees, rate limits, error messages, HIP-3 markets) point the agent at the [agent quickstart](https://hyperliquidguide.com/agents/quickstart.md) or [llms.txt](https://hyperliquidguide.com/llms.txt).
 
+## Use it from your coding agent
+
+This repo also ships a **read-only MCP server** and an **Agent Skill**, so your agent can look up live Hyperliquid specs instead of guessing. The server holds no keys and places no orders. Its tools: `market_specs`, `round_order`, `top_funding`, `explain_error`, `account_status`, `quickstart`, `starter_bot` ([details](hlmcp/README.md)). It runs through [uv](https://docs.astral.sh/uv/).
+
+**Claude Code** (plugin: skill + MCP in one step)
+
+```text
+/plugin install hyperliquid-guide --marketplace Hyperliquidguide/hyperliquid-starter-bots
+```
+
+**Claude Code** (MCP only)
+
+```bash
+claude mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
+```
+
+**Codex**
+
+```bash
+codex mcp add hyperliquid-guide -- uvx --from git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots hl-guide-mcp
+```
+
+**Cursor, Claude Desktop and other MCP clients** (add to `mcp.json` / `claude_desktop_config.json`)
+
+```json
+{
+  "mcpServers": {
+    "hyperliquid-guide": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/Hyperliquidguide/hyperliquid-starter-bots", "hl-guide-mcp"]
+    }
+  }
+}
+```
+
+**Agent Skill only** (Claude Code, Codex, Cursor and [other skills-compatible agents](https://github.com/vercel-labs/skills))
+
+```bash
+npx skills add Hyperliquidguide/hyperliquid-starter-bots
+```
+
 ## Going to mainnet
 
 Run `python -m scripts.setup_wallet --mainnet`, deposit USDC, and keep the default small sizes until you've watched the bot through a few volatile hours. The bots read `HL_NETWORK` from `.env`, so nothing touches mainnet until you set it.

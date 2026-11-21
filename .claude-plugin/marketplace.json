@@ -1,0 +1,15 @@
+{
+  "name": "hyperliquid-guide",
+  "owner": {
+    "name": "Hyperliquid Guide",
+    "url": "https://hyperliquidguide.com"
+  },
+  "plugins": [
+    {
+      "name": "hyperliquid-guide",
+      "source": "./",
+      "description": "Hyperliquid bot-builder skill and read-only MCP server from Hyperliquid Guide (independent, not affiliated with Hyperliquid)."
+    }
+  ],
+  "description": "Hyperliquid trading-bot tooling from Hyperliquid Guide: a bot-builder skill and a read-only MCP server."
+}

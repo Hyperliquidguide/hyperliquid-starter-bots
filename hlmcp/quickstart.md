@@ -16,7 +16,7 @@ python -m scripts.setup_wallet          # testnet; asks for the main key once, s
 python -m bots.market_maker --coin BTC --dry-run
 ```
 
-The repo's `AGENTS.md` lists the layout and the rules for adding a strategy. Bots included: `market_maker`, `scalper`, `grid`, `funding_arb`. Each supports `--dry-run` and `--run-seconds`, runs on testnet unless `HL_NETWORK=mainnet`, and enforces max order size, max position and a daily loss stop.
+The repo's `AGENTS.md` lists the layout and the rules for adding a strategy. Bots included: `market_maker`, `scalper`, `grid`, `funding_arb`, plus `twap` (maker-first sliced execution). Each supports `--dry-run` (the strategy bots also take `--run-seconds`; TWAP uses `--minutes`), runs on testnet unless `HL_NETWORK=mainnet`, and enforces max order size, max position and a daily loss stop.
 
 ## MCP server and Agent Skill
 
@@ -110,6 +110,12 @@ What we measured on testnet on 2026-11-21:
 - A referral gives the trader 4% off fees on their first $25M of volume. The referrer receives a share of the fees from Hyperliquid. It never costs the trader more.
 
 Disclosure: Hyperliquid Guide's starter repo applies its code `CONCEPT211` to accounts that have no referrer, prints that it did so, and skips it when `HL_REFERRAL=off`. If you build on it, tell your user and keep the opt-out.
+
+## Using CCXT, Freqtrade or Hummingbot instead
+
+- **CCXT** (`ccxt.hyperliquid`): `walletAddress` = main address, `privateKey` = API wallet key. Per CCXT's source it signs `setReferrer` with `options.ref` (default `CCXT1`) as soon as `load_markets()` runs with credentials, and approves a 0.01% builder fee unless `options.builderFee` is `False`. Set both in the constructor, before `load_markets()`. Guide: https://hyperliquidguide.com/guides/trading/hyperliquid-ccxt-guide
+- **Freqtrade** uses CCXT: put the same keys in `exchange.ccxt_config.options`. It strips keys in dry-run, so the referral call happens on the first live start. Guide: https://hyperliquidguide.com/guides/trading/freqtrade-hyperliquid-guide
+- **Hummingbot**: `connect hyperliquid_perpetual`, choose `api_wallet` mode. Its client sets no referral and tags orders with a 0 bps builder code. Guide: https://hyperliquidguide.com/guides/trading/hummingbot-hyperliquid-guide
 
 ## Safety defaults worth keeping
 

@@ -24,7 +24,7 @@ from mcp.server.fastmcp import FastMCP
 API = {"mainnet": "https://api.hyperliquid.xyz/info", "testnet": "https://api.hyperliquid-testnet.xyz/info"}
 SITE = "https://hyperliquidguide.com"
 REPO = "https://github.com/Hyperliquidguide/hyperliquid-starter-bots"
-BOTS = ("market_maker", "scalper", "grid", "funding_arb")
+BOTS = ("market_maker", "scalper", "grid", "funding_arb", "twap")
 REFERRAL_VOLUME_CUTOFF = 10_000.0
 
 mcp = FastMCP(
@@ -210,7 +210,7 @@ def quickstart() -> str:
 
 @mcp.tool()
 def starter_bot(kind: str) -> str:
-    """Source code of one starter bot (market_maker, scalper, grid, funding_arb) from the open-source
+    """Source code of one starter bot (market_maker, scalper, grid, funding_arb, twap) from the open-source
     hyperliquid-starter-bots repo, with how to run it. The bots depend on the repo's hlbots package,
     so clone the repo rather than copying a single file."""
     if kind not in BOTS:

@@ -10,6 +10,6 @@ Read-only Hyperliquid reference tools for coding agents. Holds no keys, places n
 | `explain_error(message)` | Cause and fix for a Hyperliquid rejection |
 | `account_status(address)` | Equity, positions, fee rates, referral status and whether a code can still be added |
 | `quickstart()` | The agent quickstart (endpoints, rounding, errors, fees, rate limits) |
-| `starter_bot(kind)` | Source of `market_maker`, `scalper`, `grid` or `funding_arb` |
+| `starter_bot(kind)` | Source of `market_maker`, `scalper`, `grid`, `funding_arb` or `twap` |
 
 Install commands for Claude Code, Codex, Cursor and Claude Desktop are in the main [README](../README.md#use-it-from-your-coding-agent).

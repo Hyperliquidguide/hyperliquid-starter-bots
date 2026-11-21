@@ -257,6 +257,28 @@ ${box(600, 80, 220, 'Price-neutral', 'gains on one leg offset the other', C.acce
   console.log('wrote diagram-funding-arb.svg');
 }
 
+{ // twap: equal slices over time, each resting post-only first, then an IOC catch-up for the rest
+  const W = 860, H = 300, x0 = 40, x1 = 820, n = 6, y = 92, hgt = 70;
+  const sw = (x1 - x0) / n;
+  let body = '';
+  for (let i = 0; i < n; i++) {
+    const x = x0 + i * sw, passive = (sw - 10) * 0.7, rest = sw - 10 - passive;
+    const filled = [1, 0.55, 1, 0.8, 0.35, 1][i];
+    body += `<rect x="${x}" y="${y}" width="${passive}" height="${hgt}" rx="6" fill="${C.green}" fill-opacity=".14" stroke="${C.green}" stroke-opacity=".7"/>`;
+    body += `<rect x="${x}" y="${y + hgt * (1 - filled)}" width="${passive}" height="${hgt * filled}" rx="6" fill="${C.green}" fill-opacity=".35"/>`;
+    if (filled < 1) {
+      body += `<rect x="${x + passive + 2}" y="${y + hgt * filled * 0}" width="${rest - 2}" height="${hgt * (1 - filled)}" rx="5" fill="${C.amber}" fill-opacity=".3" stroke="${C.amber}" stroke-opacity=".8"/>`;
+    }
+    body += `<text x="${x + passive / 2}" y="${y + hgt + 20}" text-anchor="middle" fill="${C.dim}" font-size="11">slice ${i + 1}</text>`;
+  }
+  body += `<line x1="${x0}" y1="${y - 14}" x2="${x1}" y2="${y - 14}" stroke="${C.dim}" stroke-opacity=".6"/><text x="${x1}" y="${y - 20}" text-anchor="end" fill="${C.dim}" font-size="11">time →</text>`;
+  body += `<rect x="40" y="214" width="14" height="14" rx="3" fill="${C.green}" fill-opacity=".5"/><text x="62" y="226" fill="${C.text}" font-size="13">Rests post-only at the touch first: fills pay the maker fee.</text>`;
+  body += `<rect x="40" y="240" width="14" height="14" rx="3" fill="${C.amber}" fill-opacity=".6"/><text x="62" y="252" fill="${C.text}" font-size="13">Whatever is left crosses with an IOC, capped by --max-slippage-bps and --limit-px.</text>`;
+  body += `<text x="40" y="280" fill="${C.dim}" font-size="12">Execution tooling, not a strategy: it only decides how an order you chose gets filled.</text>`;
+  fs.writeFileSync(path.join(OUT, 'diagram-twap.svg'), frame(W, H, 'TWAP: equal slices over time, maker first, capped catch-up', body, 'TWAP execution diagram'));
+  console.log('wrote diagram-twap.svg');
+}
+
 // Static copy of the terminal demo for web pages, where an animation that starts blank looks broken.
 {
   const anim = fs.readFileSync(path.join(OUT, 'terminal-demo.svg'), 'utf8');

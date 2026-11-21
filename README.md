@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <b>Four small, readable trading bots for <a href="https://app.hyperliquid.xyz/join/CONCEPT211">Hyperliquid</a>.</b><br>
+  <b>Four small, readable trading bots and a TWAP executor for <a href="https://app.hyperliquid.xyz/join/CONCEPT211">Hyperliquid</a>.</b><br>
   Run one on testnet in five minutes, then have your coding agent turn it into your own strategy.
 </p>
 
@@ -77,7 +77,17 @@ python -m bots.funding_arb --coin HYPE --min-apr 20 --exit-apr 5
 
 <img src="assets/diagram-funding-arb.svg" alt="Funding arbitrage: spot long plus perp short" width="100%">
 
-Every bot takes `--help`, `--dry-run` and `--run-seconds`. HIP-3 markets use their dex prefix, for example `--coin xyz:XYZ100`.
+### TWAP · `bots/twap.py`
+
+Execution tooling rather than a strategy: it works an order you already chose in equal slices over time. Each slice rests post-only at the touch first (maker fee), and whatever is left crosses with an IOC capped by `--max-slippage-bps` and `--limit-px`. `--reduce-only` unwinds a position. Hyperliquid also has a [native TWAP order](https://hyperliquidguide.com/guides/trading/twap-orders); use this one when you want your own rules.
+
+```bash
+python -m bots.twap --coin ETH --side buy --total-usd 300 --minutes 30 --limit-px 3200
+```
+
+<img src="assets/diagram-twap.svg" alt="TWAP slices: post-only first, then a capped IOC catch-up" width="100%">
+
+Every bot takes `--help` and `--dry-run`, and the strategy bots take `--run-seconds` (TWAP uses `--minutes`). HIP-3 markets use their dex prefix, for example `--coin xyz:XYZ100`.
 
 ## Quick start (testnet)
 
